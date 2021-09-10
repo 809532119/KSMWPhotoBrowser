@@ -7,10 +7,12 @@
 //
 
 #import "UIImage+MWPhotoBrowser.h"
+#import "MWPhoto.h"
 
 @implementation UIImage (MWPhotoBrowser)
 
-+ (UIImage *)imageForResourcePath:(NSString *)path ofType:(NSString *)type inBundle:(NSBundle *)bundle {
++ (UIImage *)imageForResourcePath:(NSString *)path ofType:(NSString *)type {
+    NSBundle *bundle = [NSBundle bundleForClass:[MWPhoto class]];
     return [UIImage imageWithContentsOfFile:[bundle pathForResource:path ofType:type]];
 }
 
