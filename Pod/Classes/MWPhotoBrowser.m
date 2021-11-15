@@ -438,6 +438,7 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
 
 - (void)setNavBarAppearance:(BOOL)animated {
     [self.navigationController setNavigationBarHidden:NO animated:animated];
+    UINavigationBar *navBar = self.navigationController.navigationBar;
     if (@available(iOS 15.0, *)) {
         UINavigationBarAppearance *scrollEdgeAppearance = [[UINavigationBarAppearance alloc] init];
         [scrollEdgeAppearance configureWithTransparentBackground];
@@ -446,7 +447,6 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
         navBar.scrollEdgeAppearance = scrollEdgeAppearance;
         navBar.standardAppearance = [scrollEdgeAppearance copy];
     }else {
-        UINavigationBar *navBar = self.navigationController.navigationBar;
         navBar.tintColor = [UIColor whiteColor];
         navBar.barTintColor = nil;
         navBar.shadowImage = nil;
