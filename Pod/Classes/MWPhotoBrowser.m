@@ -404,6 +404,15 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
     [self.navigationController.navigationBar.layer removeAllAnimations]; // Stop all animations on nav bar
     [NSObject cancelPreviousPerformRequestsWithTarget:self]; // Cancel any pending toggles from taps
     [self setControlsHidden:NO animated:NO permanent:YES];
+    if (@available(iOS 15.0, *)) {
+        UINavigationBar *navBar = self.navigationController.navigationBar;
+        UINavigationBarAppearance *scrollEdgeAppearance = [[UINavigationBarAppearance alloc] init];
+        [scrollEdgeAppearance configureWithTransparentBackground];
+        scrollEdgeAppearance.shadowColor = UIColor.clearColor;
+        scrollEdgeAppearance.backgroundColor = UIColor.whiteColor;
+        navBar.scrollEdgeAppearance = scrollEdgeAppearance;
+        navBar.standardAppearance = [scrollEdgeAppearance copy];
+    }
     
     // Status bar
     if (!_leaveStatusBarAlone && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
@@ -429,14 +438,23 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
 
 - (void)setNavBarAppearance:(BOOL)animated {
     [self.navigationController setNavigationBarHidden:NO animated:animated];
-    UINavigationBar *navBar = self.navigationController.navigationBar;
-    navBar.tintColor = [UIColor whiteColor];
-    navBar.barTintColor = nil;
-    navBar.shadowImage = nil;
-    navBar.translucent = YES;
-    navBar.barStyle = UIBarStyleBlackTranslucent;
-    [navBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
-    [navBar setBackgroundImage:nil forBarMetrics:UIBarMetricsCompact];
+    if (@available(iOS 15.0, *)) {
+        UINavigationBarAppearance *scrollEdgeAppearance = [[UINavigationBarAppearance alloc] init];
+        [scrollEdgeAppearance configureWithTransparentBackground];
+        scrollEdgeAppearance.shadowColor = UIColor.clearColor;
+        scrollEdgeAppearance.backgroundColor = UIColor.blackColor;
+        navBar.scrollEdgeAppearance = scrollEdgeAppearance;
+        navBar.standardAppearance = [scrollEdgeAppearance copy];
+    }else {
+        UINavigationBar *navBar = self.navigationController.navigationBar;
+        navBar.tintColor = [UIColor whiteColor];
+        navBar.barTintColor = nil;
+        navBar.shadowImage = nil;
+        navBar.translucent = YES;
+        navBar.barStyle = UIBarStyleBlackTranslucent;
+        [navBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+        [navBar setBackgroundImage:nil forBarMetrics:UIBarMetricsCompact];
+    }
 }
 
 - (void)storePreviousNavBarAppearance {
