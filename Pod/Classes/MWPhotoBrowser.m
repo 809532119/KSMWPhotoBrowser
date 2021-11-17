@@ -410,6 +410,7 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
         [scrollEdgeAppearance configureWithTransparentBackground];
         scrollEdgeAppearance.shadowColor = UIColor.clearColor;
         scrollEdgeAppearance.backgroundColor = UIColor.whiteColor;
+        scrollEdgeAppearance.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor blackColor]};
         navBar.scrollEdgeAppearance = scrollEdgeAppearance;
         navBar.standardAppearance = [scrollEdgeAppearance copy];
     }
@@ -444,6 +445,7 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
         [scrollEdgeAppearance configureWithTransparentBackground];
         scrollEdgeAppearance.shadowColor = UIColor.clearColor;
         scrollEdgeAppearance.backgroundColor = UIColor.blackColor;
+        scrollEdgeAppearance.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor]};
         navBar.scrollEdgeAppearance = scrollEdgeAppearance;
         navBar.standardAppearance = [scrollEdgeAppearance copy];
     }else {
